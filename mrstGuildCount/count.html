@@ -1,0 +1,116 @@
+<html>
+<head>
+<style>
+.box {
+  width: 200px;
+  height: 150px;
+  display: table-cell;
+}
+.nw {
+  background-color: #fdbf2d; /* ‰© */
+}
+.ne {
+  background-color: #fc585a; /* Ô */
+}
+.sw {
+  background-color: #2ed2fd; /* Â */
+}
+.se {
+  background-color: #49b21f; /* —Î */
+}
+.name{
+  width: 100%;
+  height: 30%;
+}
+.count {
+  width: 100%;
+  height: 30%;
+}
+.up, .down {
+  width: 50%;
+  height: 40%;
+  padding-top: 10%;
+  padding-bottom: 10%;
+}
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+</style>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+$(document).ready(function(){
+  $(".up").click(function() {
+    changeCount(this, 1);
+  });
+
+  $(".down").click(function() {
+    changeCount(this, -1);
+  });
+
+  function changeCount(element, d) {
+    var guildElement = element.parentElement;
+    var classNameList = guildElement.className.split(' ');
+    for(var i=0; i<classNameList.length; i++) {
+      var className = classNameList[i];
+      if(className === "nw" || className === "ne" || className === "sw" || className === "se") {
+        var countSpanElement = $(guildElement).find(".count span");
+        var count = countSpanElement.text();
+        count = parseInt(count) + d;
+        if(count<0) count = 0;
+        if(count>20) count = 20;
+        countSpanElement.text(count);
+      }
+    }
+  }
+});
+</script>
+</head>
+<body>
+<div id="main">
+	<div>
+		<div class="box nw">
+			<div class="name content">
+				<span>guild1</span>
+			</div>
+			<div class="count content">
+				<span>0</span>
+			</div>
+			<button class="up">ª</button><button class="down">«</button>
+		</div>
+		<div class="box ne">
+			<div class="name content">
+				<span>guild2</span>
+			</div>
+			<div class="count content">
+				<span>0</span>
+			</div>
+			<button class="up">ª</button><button class="down">«</button>
+		</div>
+	</div>
+	<div>
+		<div class="box sw">
+			<div class="name content">
+				<span>guild3</span>
+			</div>
+			<div class="count content">
+				<span>0</span>
+			</div>
+			<button class="up">ª</button><button class="down">«</button>
+		</div>
+
+		<div class="box se">
+			<div class="name content">
+				<span>guild4</span>
+			</div>
+			<div class="count content">
+				<span>0</span>
+			</div>
+			<button class="up">ª</button><button class="down">«</button>
+		</div>
+
+	</div>
+</div>
+</body>
+</html>
