@@ -7,16 +7,16 @@
   display: table-cell;
 }
 
-.nw {
+#guild1 {
   background-color: #fdbf2d; /* 黄 */
 }
-.ne {
+#guild2 {
   background-color: #fc585a; /* 赤 */
 }
-.sw {
+#guild3 {
   background-color: #2ed2fd; /* 青 */
 }
-.se {
+#guild4 {
   background-color: #49b21f; /* 緑 */
 }
 .name{
@@ -40,28 +40,41 @@ button {
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
 $(document).ready(function(){
+  // カウントアップ
   $(".up").click(function() {
     changeCount(this, 1);
   });
 
+  // カウントダウン
   $(".down").click(function() {
     changeCount(this, -1);
   });
 
+  // カウント数値変更
   function changeCount(element, d) {
     var guildElement = element.parentElement;
-    var classNameList = guildElement.className.split(' ');
-    for(var i=0; i<classNameList.length; i++) {
-      var className = classNameList[i];
-      if(className === "nw" || className === "ne" || className === "sw" || className === "se") {
-        var countSpanElement = $(guildElement).find(".count span");
-        var count = countSpanElement.text();
-        count = parseInt(count) + d;
-        if(count<0) count = 0;
-        if(count>20) count = 20;
-        countSpanElement.text(count);
-      }
-    }
+    var countSpanElement = $(guildElement).find(".count span");
+    var count = countSpanElement.text();
+    count = parseInt(count) + d;
+    if(count<0) count = 0;
+    if(count>20) count = 20;
+    countSpanElement.text(count);
+  }
+
+  // 状態の記録
+  $("#record").click(function(){
+    var record = getGuildStatus("#guild1") + getGuildStatus("#guild2") + getGuildStatus("#guild3") + getGuildStatus("#guild4");
+    var date = new Date();
+    var time = ("00" + date.getHours()).slice(-2) + ":" + ("00" + date.getMinutes()).slice(-2);
+    record = "<div>" + time + " " + record + "</div>";
+    $("#list").append(record);
+  });
+
+  function getGuildStatus(guildId){
+    var guildName = $(guildId).find(".name span").text();
+    var guildCount = $(guildId).find(".count span").text();
+    var guildStatus = guildName + guildCount;
+    return guildStatus;
   }
 });
 </script>
@@ -69,18 +82,18 @@ $(document).ready(function(){
 <body>
 <div id="main">
 	<div>
-		<div class="box nw">
+		<div class="box" id="guild1">
 			<div class="name content">
-				<span>guild1</span>
+				<span>黄</span>
 			</div>
 			<div class="count content">
 				<span>0</span>
 			</div>
 			<button type="button" class="up">↑</button><button class="down">↓</button>
 		</div>
-		<div class="box ne">
+		<div class="box" id="guild2">
 			<div class="name content">
-				<span>guild2</span>
+				<span>赤</span>
 			</div>
 			<div class="count content">
 				<span>0</span>
@@ -89,9 +102,9 @@ $(document).ready(function(){
 		</div>
 	</div>
 	<div>
-		<div class="box sw">
+		<div class="box" id="guild3">
 			<div class="name content">
-				<span>guild3</span>
+				<span>青</span>
 			</div>
 			<div class="count content">
 				<span>0</span>
@@ -99,9 +112,9 @@ $(document).ready(function(){
 			<button class="up">↑</button><button class="down">↓</button>
 		</div>
 
-		<div class="box se">
+		<div class="box" id="guild4">
 			<div class="name content">
-				<span>guild4</span>
+				<span>緑</span>
 			</div>
 			<div class="count content">
 				<span>0</span>
@@ -110,6 +123,10 @@ $(document).ready(function(){
 		</div>
 
 	</div>
+</div>
+<div>
+	<button id="record">記録</button>
+	<div id="list"></div>
 </div>
 </body>
 </html>
