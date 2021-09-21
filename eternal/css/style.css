@@ -36,6 +36,24 @@ hr.scene_change::after {
   right: 30px;
 }
 
+blockquote {
+  border-left: 3px solid #666;
+  padding-left: 10px;
+}
+
+span.lightmace {
+  font-size: 32px;
+  font-weight: bold;
+  background: linear-gradient(to right, red, orange , yellow, green, cyan, blue, violet);
+  background: -webkit-linear-gradient(left, red, orange , yellow, green, cyan, blue, violet);
+  background: -o-linear-gradient(right, red, orange, yellow, green, cyan, blue, violet);
+  background: -moz-linear-gradient(right, red, orange, yellow, green, cyan, blue, violet);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+}
+
 @media all and (max-width: 480px) {
   body {
     padding: 0 10px;
