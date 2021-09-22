@@ -62,4 +62,10 @@ span.lightmace {
   h1 {
     font-size: 18px;
   }
+
+  span.lightmace {
+    font-size: 32px;
+    font-weight: bold;
+    font-color: red;
+  }
 }
